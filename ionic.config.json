@@ -1,0 +1,7 @@
+{
+  "name": "Kidlandia",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
