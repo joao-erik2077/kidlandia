@@ -47,3 +47,21 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   --font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
+
+:root {
+	--ion-color-kid-primary: #01BAEF;
+	--ion-color-kid-primary-rgb: 1,186,239;
+	--ion-color-kid-primary-contrast: #383636;
+	--ion-color-kid-primary-contrast-rgb: 56, 54, 54;
+	--ion-color-kid-primary-shade: #01a4d2;
+	--ion-color-kid-primary-tint: #1ac1f1;
+}
+
+.ion-color-kid-primary {
+	--ion-color-base: var(--ion-color-kid-primary);
+	--ion-color-base-rgb: var(--ion-color-kid-primary-rgb);
+	--ion-color-contrast: var(--ion-color-kid-primary-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-kid-primary-contrast-rgb);
+	--ion-color-shade: var(--ion-color-kid-primary-shade);
+	--ion-color-tint: var(--ion-color-kid-primary-tint);
+}
