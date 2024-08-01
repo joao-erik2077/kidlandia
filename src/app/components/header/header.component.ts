@@ -13,6 +13,7 @@ import { IonicModule } from '@ionic/angular';
   ]
 })
 export class HeaderComponent   {
+  public title = "kidlândia";
 
   constructor() { }
 
