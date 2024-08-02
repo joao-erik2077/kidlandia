@@ -1,4 +1,9 @@
 <app-header></app-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div>
+    <ion-list>
+      <app-story *ngFor="let story of stories" [story]="story"></app-story>
+    </ion-list>
+  </div>
 </ion-content>

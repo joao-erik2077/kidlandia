@@ -1,0 +1,57 @@
+$item_height: 10vh;
+
+ion-item {
+  display: flex;
+  height: $item_height;
+  --border-color: #A1A6B4;
+  --border-width: 1px 0 1px 0;
+  overflow: visible;
+
+  .section {
+    height: $item_height;
+    display: flex;
+    flex-direction: column;
+
+    &.start {
+      z-index: 4;
+      width: 50%;
+
+      .title {
+        font-size: 20px;
+        color: #01BAEF;
+        font-weight: 500;
+      }
+
+      .chapters {
+        font-size: 12px;
+        color: #1D1D1D;
+        font-weight: 500;
+      }
+
+      .description {
+        font-size: 12px;
+        color: #3E3E3E;
+      }
+    }
+
+    &.end{
+      overflow: hidden;
+
+      ion-img {
+        z-index: 2;
+        height: 115%;
+        opacity: 0.5;
+      }
+
+      ion-icon {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+
+        z-index: 4;
+        font-size: 3rem;
+      }
+    }
+  }
+}
