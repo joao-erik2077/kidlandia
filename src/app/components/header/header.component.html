@@ -1,13 +1,16 @@
 <ion-header [translucent]="true" color="kid-primary">
   <ion-toolbar color="kid-primary">
+    <ion-buttons slot="start" *ngIf="backButton">
+      <ion-back-button default-href="/" icon="chevron-back" size="large"></ion-back-button>
+    </ion-buttons>
+
     <ion-title>
       {{ title }}
     </ion-title>
 
     <ion-buttons slot="end">
       <ion-button slot="icon-only">
-        <ion-icon name="menu">
-
+        <ion-icon name="menu" size="large">
         </ion-icon>
       </ion-button>
     </ion-buttons>

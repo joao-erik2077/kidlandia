@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -13,6 +13,9 @@ import { IonicModule } from '@ionic/angular';
   ]
 })
 export class HeaderComponent   {
+  @Input()
+  public backButton = false;
+
   public title = "kidlândia";
 
   constructor() { }

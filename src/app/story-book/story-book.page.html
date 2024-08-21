@@ -1,0 +1,15 @@
+<app-header [backButton]="true"></app-header>
+
+<ion-content [fullscreen]="true">
+  {{ currentPage.index }}
+
+  <div>
+    <p *ngFor="let phrase of currentPage.phrases">
+      {{ phrase.name }} says: {{ phrase.message }}
+    </p>
+  </div>
+
+  <ion-button (click)="goPreviousPage()" *ngIf="currentPage.hasPrevious">previous</ion-button>
+  <ion-button (click)="goNextPage()" *ngIf="currentPage.hasNext">next</ion-button>
+
+</ion-content>
