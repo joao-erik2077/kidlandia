@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" color="kid-primary">
+<ion-header [translucent]="true" color="kid-primary" *ngIf="show">
   <ion-toolbar color="kid-primary">
     <ion-buttons slot="start" *ngIf="backButton">
       <ion-back-button default-href="/" icon="chevron-back" size="large"></ion-back-button>
@@ -8,11 +8,11 @@
       {{ title }}
     </ion-title>
 
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button slot="icon-only">
         <ion-icon name="menu" size="large">
         </ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>

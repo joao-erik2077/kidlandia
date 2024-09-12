@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Story } from '../models/story';
+import { Speech, Story } from '../models/Story';
 import { StoryService } from '../services/story.service';
-import { Page } from '../models/page';
 
 @Component({
   selector: 'app-story-book',
@@ -10,21 +9,26 @@ import { Page } from '../models/page';
 })
 export class StoryBookPage implements OnInit {
   public currentStory!: Story;
-  public currentPage!: Page;
+  public shownSpeechs: Speech[] = [];
+  public showHeader = true;
+  public storyHasStarted = false;
 
   constructor(private storyService: StoryService) { }
 
   ngOnInit() {
     this.currentStory = this.storyService.getCurrentStory();
-    this.currentPage = this.currentStory.pages[0];
+    this.showHeader = false;
+    this.storyHasStarted = false;
+    console.log(this.currentStory);
   }
 
-  goNextPage() {
-    this.currentPage = this.currentStory.pages[this.currentPage.index+1];
+  startStory() {
+    this.showHeader = true;
+    this.storyHasStarted = true;
+    this.shownSpeechs.push(this.currentStory.speechs[0]);
   }
 
-  goPreviousPage() {
-    this.currentPage = this.currentStory.pages[this.currentPage.index-1];
+  continueStory() {
+    this.shownSpeechs.push(this.currentStory.speechs[this.shownSpeechs.length]);
   }
-
 }

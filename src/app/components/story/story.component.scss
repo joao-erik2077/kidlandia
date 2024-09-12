@@ -22,12 +22,6 @@ ion-item {
         font-weight: 500;
       }
 
-      .chapters {
-        font-size: 12px;
-        color: #1D1D1D;
-        font-weight: 500;
-      }
-
       .description {
         font-size: 12px;
         color: #3E3E3E;
@@ -36,11 +30,12 @@ ion-item {
 
     &.end{
       overflow: hidden;
+      padding-right: 25px;
 
       ion-img {
         z-index: 2;
-        height: 115%;
-        opacity: 0.5;
+        height: 100%;
+        opacity: 0.8;
       }
 
       ion-icon {

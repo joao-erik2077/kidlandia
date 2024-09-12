@@ -16,7 +16,11 @@ export class HeaderComponent   {
   @Input()
   public backButton = false;
 
+  @Input()
   public title = "kidlândia";
+
+  @Input()
+  public show = true;
 
   constructor() { }
 

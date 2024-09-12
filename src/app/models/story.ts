@@ -1,9 +1,25 @@
-import { Page } from "./page";
+import { Character } from "./Character";
 
 export interface Story {
   title: string,
-  number_of_chapters: number,
   description: string,
   image: string,
-  pages: Page[],
+  speechs: Speech[],
+}
+
+export interface Speech {
+  text: string,
+  character: Character,
+  question?: Question,
+}
+
+interface Question {
+  type: 'multipleChoice' | 'selectText',
+  text: string,
+  options?: QuestionOption[],
+}
+
+interface QuestionOption {
+  text: string,
+  valid: boolean,
 }

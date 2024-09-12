@@ -8,7 +8,8 @@ const routes: Routes = [
   },  {
     path: 'story-book',
     loadChildren: () => import('./story-book/story-book.module').then( m => m.StoryBookPageModule)
-  }
+  },
+
 
 ];
 @NgModule({

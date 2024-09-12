@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Story } from '../../models/story';
+import { Story } from '../../models/Story';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 

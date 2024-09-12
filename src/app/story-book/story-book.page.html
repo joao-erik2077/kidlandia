@@ -1,15 +1,35 @@
-<app-header [backButton]="true"></app-header>
+<app-header
+  [backButton]="true"
+  [title]="currentStory.title"
+  [show]="showHeader || true"
+></app-header>
 
 <ion-content [fullscreen]="true">
-  {{ currentPage.index }}
-
-  <div>
-    <p *ngFor="let phrase of currentPage.phrases">
-      {{ phrase.name }} says: {{ phrase.message }}
-    </p>
+  <div class="cover" [ngClass]="{storyHasStarted: storyHasStarted}">
+    <div class="imageContainer">
+      <img [src]="currentStory.image" [alt]="currentStory.title" />
+    </div>
+    <div>
+      <ion-text class="title">{{ currentStory.title }}</ion-text>
+      <ion-icon slot="end" name="volume-medium"></ion-icon>
+    </div>
+    <ion-button
+      class="startStoryButton"
+      color="success"
+      fill="outline"
+      (click)="startStory()"
+      >Start</ion-button
+    >
   </div>
 
-  <ion-button (click)="goPreviousPage()" *ngIf="currentPage.hasPrevious">previous</ion-button>
-  <ion-button (click)="goNextPage()" *ngIf="currentPage.hasNext">next</ion-button>
-
+  <div *ngIf="storyHasStarted" class="main">
+    <app-chat *ngFor="let speech of shownSpeechs" [speech]="speech"></app-chat>
+    <ion-button
+      fill="outline"
+      color="success"
+      expand="block"
+      (click)="continueStory()"
+      >Continuar</ion-button
+    >
+  </div>
 </ion-content>

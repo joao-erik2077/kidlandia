@@ -8,6 +8,7 @@ import { StoryBookPageRoutingModule } from './story-book-routing.module';
 
 import { StoryBookPage } from './story-book.page';
 import { HeaderComponent } from '../components/header/header.component';
+import { ChatComponent } from '../components/chat/chat.component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { HeaderComponent } from '../components/header/header.component';
     FormsModule,
     IonicModule,
     StoryBookPageRoutingModule,
-    HeaderComponent
+    HeaderComponent,
+    ChatComponent
   ],
   declarations: [StoryBookPage]
 })
-export class StoryBookPageModule {}
+export class StoryBookPageModule { }
