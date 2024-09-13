@@ -1,0 +1,27 @@
+ion-card-header {
+  margin-bottom: 15px;
+
+  ion-card-title {
+    text-align: justify;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+}
+
+ion-card {
+  border: none;
+  box-shadow: none;
+}
+
+.continueButton {
+  z-index: 3;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 1 !important;
+}
+
+.button {
+  opacity: 0;
+  transition: 0.3s;
+}

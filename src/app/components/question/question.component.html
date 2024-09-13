@@ -1,0 +1,35 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ question?.text }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div *ngIf="question?.type === 'multipleChoice'">
+      <app-multiple-choice-option
+        *ngFor="let option of question?.options"
+        [option]="option"
+        [disabled]="questionFinished"
+        (correctOptionClick)="correctOptionClick($event)"
+      >
+      </app-multiple-choice-option>
+    </div>
+
+    <div class="selectText" *ngIf="question?.type === 'selectText'">
+      <app-select-text-option
+        *ngFor="let option of question?.options"
+        [option]="option"
+        [disabled]="questionFinished"
+        (correctOptionClick)="correctOptionClick($event)"
+      >
+      </app-select-text-option>
+    </div>
+  </ion-card-content>
+</ion-card>
+
+<ion-button
+  [ngClass]="{ continueButton: questionOptionCorrect }"
+  class="button"
+  fill="outline"
+  color="success"
+  (click)="continue()"
+  >Continuar</ion-button
+>

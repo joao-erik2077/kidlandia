@@ -1,0 +1,21 @@
+ion-text {
+  padding: 10px;
+  font-size: 1rem;
+  margin-left: 8px;
+  border-radius: 5px;
+  color: #202020;
+  border: 1px solid #757575;
+  box-shadow: 1px 1px 2px 1px #757575;
+  transition: 0.1s;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.correct {
+  color: #202020;
+  background-color: #77ff95;
+  border: 1px solid #757575;
+  box-shadow: 1px 1px 2px 1px #757575;
+}

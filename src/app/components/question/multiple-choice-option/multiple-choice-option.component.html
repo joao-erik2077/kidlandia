@@ -1,0 +1,17 @@
+<ion-item
+  (click)="!clicked && !disabled && resolveOption()"
+  lines="none"
+  [ngClass]="{
+    clickedValid: clicked && option.valid,
+    clickedInvalid: clicked && !option.valid,
+    disabled: disabled && !option.valid
+  }"
+>
+  <div class="iconContainer">
+    <ion-icon
+      [name]="option.valid ? 'checkmark' : 'close'"
+      *ngIf="clicked"
+    ></ion-icon>
+  </div>
+  <ion-text>{{ option.text }}</ion-text>
+</ion-item>

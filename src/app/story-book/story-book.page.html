@@ -19,17 +19,35 @@
   </div>
 
   <div class="mainNotShowing" [ngClass]="{main: storyHasStarted}">
-    <app-chat *ngFor="let speech of shownSpeechs" [speech]="speech"></app-chat>
+    <div>
+      <app-chat
+        *ngFor="let speech of shownSpeechs"
+        [speech]="speech"
+      ></app-chat>
+
+      <app-question
+        class="question"
+        [ngClass]="{showingQuestion: isDoingQuestion}"
+        *ngIf="isDoingQuestion"
+        [question]="currentQuestion"
+        (correctOptionClicked)="resolveQuestion($event)"
+      ></app-question>
+    </div>
+
     <ion-button
+      [ngClass]="{continueButton: maxSpeechs !== shownSpeechs.length && !isDoingQuestion}"
+      class="button"
       fill="outline"
       color="success"
       (click)="continueStory()"
-      *ngIf="maxSpeechs !== shownSpeechs.length"
+      *ngIf="maxSpeechs !== shownSpeechs.length && !isDoingQuestion"
       >Continuar</ion-button
     >
     <div class="filler"></div>
 
     <ion-button
+      [ngClass]="{continueButton: maxSpeechs === shownSpeechs.length}"
+      class="button"
       fill="outline"
       color="success"
       (click)="exit()"

@@ -9,6 +9,7 @@ import { StoryBookPageRoutingModule } from './story-book-routing.module';
 import { StoryBookPage } from './story-book.page';
 import { HeaderComponent } from '../components/header/header.component';
 import { ChatComponent } from '../components/chat/chat.component';
+import { QuestionComponent } from '../components/question/question.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ChatComponent } from '../components/chat/chat.component';
     IonicModule,
     StoryBookPageRoutingModule,
     HeaderComponent,
-    ChatComponent
+    ChatComponent,
+    QuestionComponent
   ],
   declarations: [StoryBookPage]
 })

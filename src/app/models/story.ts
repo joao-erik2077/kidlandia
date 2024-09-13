@@ -13,13 +13,13 @@ export interface Speech {
   question?: Question,
 }
 
-interface Question {
+export interface Question {
   type: 'multipleChoice' | 'selectText',
   text: string,
   options?: QuestionOption[],
 }
 
-interface QuestionOption {
+export interface QuestionOption {
   text: string,
   valid: boolean,
 }

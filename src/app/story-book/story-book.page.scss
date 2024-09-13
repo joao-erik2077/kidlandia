@@ -5,13 +5,17 @@
     height: 45vh;
   }
 
-  ion-button {
+  .continueButton {
     z-index: 3;
-    transition: 2.5s;
     position: fixed;
     right: 20px;
     bottom: 20px;
     opacity: 1 !important;
+  }
+
+  .button {
+    opacity: 0;
+    transition: 2.5s;
   }
 }
 
@@ -30,6 +34,7 @@
   justify-content: center;
   flex-direction: column;
   .imageContainer {
+    overflow: hidden;
     transition: 1.5s;
     width: 80%;
     aspect-ratio: 1;
@@ -71,7 +76,7 @@
   .imageContainer {
     width: 20vh;
     aspect-ratio: 1;
-    border-radius: 15px;
+    border-radius: 50%;
     border: 1px solid #c4c4c4;
     img {
       width: 100%;
@@ -97,4 +102,13 @@
     opacity: 0;
     visibility: hidden;
   }
+}
+
+.question {
+  transition: 0.2s;
+  opacity: 0;
+}
+
+.showingQuestion {
+  opacity: 1;
 }
