@@ -1,8 +1,9 @@
 <ion-text
   (click)="!clicked && !disabled && resolveOption()"
   [ngClass]="{
-    disabled: (clicked && !option.valid) || (disabled && !option.valid),
-    correct: clicked && option.valid
+    disabled: disabled && !option.valid,
+    correct: clicked && option.valid,
+    wrong: clicked && !option.valid
   }"
 >
   {{ option.text }}

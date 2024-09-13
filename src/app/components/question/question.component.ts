@@ -29,6 +29,8 @@ export class QuestionComponent implements OnInit {
 
   questionFinished = false;
 
+  finished = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class QuestionComponent implements OnInit {
   }
 
   continue() {
+    this.finished = true;
     this.correctOptionClicked.emit(this.questionOptionCorrect);
   }
 

@@ -17,7 +17,7 @@ import { narrator } from 'src/app/models/characters';
 export class ChatComponent implements OnInit {
 
   @Input()
-  speech!: Speech;
+  speech?: Speech;
 
   narrator = narrator;
 

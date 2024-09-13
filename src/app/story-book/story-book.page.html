@@ -19,40 +19,49 @@
   </div>
 
   <div class="mainNotShowing" [ngClass]="{main: storyHasStarted}">
-    <div>
+    <div class="content" *ngFor="let line of storyLine">
       <app-chat
-        *ngFor="let speech of shownSpeechs"
-        [speech]="speech"
+        *ngIf="line.type === 'speech'"
+        [speech]="line.speech"
       ></app-chat>
 
       <app-question
         class="question"
-        [ngClass]="{showingQuestion: isDoingQuestion}"
-        *ngIf="isDoingQuestion"
-        [question]="currentQuestion"
+        *ngIf="line.type === 'question'"
+        [question]="line.question"
         (correctOptionClicked)="resolveQuestion($event)"
       ></app-question>
     </div>
 
+    <!-- <app-chat *ngFor="let speech of shownSpeechs" [speech]="speech"></app-chat>
+
+    <app-question
+      class="question"
+      [ngClass]="{showingQuestion: isDoingQuestion}"
+      *ngIf="isDoingQuestion"
+      [question]="currentQuestion"
+      (correctOptionClicked)="resolveQuestion($event)"
+    ></app-question> -->
+
     <ion-button
-      [ngClass]="{continueButton: maxSpeechs !== shownSpeechs.length && !isDoingQuestion}"
+      [ngClass]="{continueButton: !storyFinished, notTransition: storyLine.length > 1}"
       class="button"
       fill="outline"
       color="success"
       (click)="continueStory()"
-      *ngIf="maxSpeechs !== shownSpeechs.length && !isDoingQuestion"
+      *ngIf="!storyFinished && !isDoingQuestion"
       >Continuar</ion-button
     >
-    <div class="filler"></div>
 
     <ion-button
-      [ngClass]="{continueButton: maxSpeechs === shownSpeechs.length}"
+      [ngClass]="{continueButton: storyFinished}"
       class="button"
       fill="outline"
       color="success"
       (click)="exit()"
-      *ngIf="maxSpeechs === shownSpeechs.length"
+      *ngIf="storyFinished"
       >Finalizar</ion-button
     >
+    <div class="filler"></div>
   </div>
 </ion-content>

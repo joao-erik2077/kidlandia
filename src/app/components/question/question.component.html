@@ -26,6 +26,7 @@
 </ion-card>
 
 <ion-button
+  *ngIf="!finished"
   [ngClass]="{ continueButton: questionOptionCorrect }"
   class="button"
   fill="outline"

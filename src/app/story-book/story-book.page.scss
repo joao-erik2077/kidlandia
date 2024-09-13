@@ -106,9 +106,8 @@
 
 .question {
   transition: 0.2s;
-  opacity: 0;
 }
 
-.showingQuestion {
-  opacity: 1;
+.notTransition {
+  transition: 0s !important;
 }

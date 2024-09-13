@@ -15,7 +15,10 @@ export class StoryBookPage implements OnInit {
   public maxSpeechs!: number;
   public storyHasStarted = false;
   public isDoingQuestion = false;
-  public currentQuestion?: Question;
+  //public currentQuestion?: Question;
+
+  public storyLine: { type: 'speech' | 'question', question?: Question, speech?: Speech }[] = [];
+  public storyFinished = false;
 
   @ViewChild(IonContent)
   content!: IonContent;
@@ -28,6 +31,7 @@ export class StoryBookPage implements OnInit {
     this.currentStory = this.storyService.getCurrentStory();
     this.storyHasStarted = false;
     this.shownSpeechs = [];
+    this.storyLine = [];
     this.maxSpeechs = this.currentStory.speechs.length;
     console.log(this.currentStory);
   }
@@ -35,22 +39,28 @@ export class StoryBookPage implements OnInit {
   startStory() {
     this.storyHasStarted = true;
     this.shownSpeechs.push(this.currentStory.speechs[0]);
+    this.storyLine.push({ type: 'speech', speech: this.currentStory.speechs[0] });
   }
 
   continueStory(skipQuestion = false) {
+    console.log('b' + this.maxSpeechs, this.shownSpeechs.length)
     if (!skipQuestion && this.shownSpeechs[this.shownSpeechs.length - 1].question !== undefined) {
       this.content.scrollToBottom(500);
 
       return this.startQuestion(this.shownSpeechs[this.shownSpeechs.length - 1]);
     }
     this.shownSpeechs.push(this.currentStory.speechs[this.shownSpeechs.length]);
+    this.storyLine.push({ type: 'speech', speech: this.currentStory.speechs[this.shownSpeechs.length] });
+    console.log('f' + this.maxSpeechs, this.shownSpeechs.length)
+    if (this.maxSpeechs === (this.shownSpeechs.length + 1)) this.storyFinished = true;
 
     this.content.scrollToBottom(500);
   }
 
   startQuestion(speech: Speech) {
     this.isDoingQuestion = true;
-    this.currentQuestion = speech.question;
+    //this.currentQuestion = speech.question;
+    this.storyLine.push({ type: 'question', question: speech.question });
   }
 
   resolveQuestion(questionOption: QuestionOption) {
@@ -64,6 +74,7 @@ export class StoryBookPage implements OnInit {
   exit() {
     this.storyHasStarted = false;
     this.shownSpeechs = [];
+    this.storyLine = [];
     this.maxSpeechs = this.currentStory.speechs.length;
     this.router.navigateByUrl('/tabs/tab2');
   }
