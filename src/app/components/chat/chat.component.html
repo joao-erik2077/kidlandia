@@ -1,7 +1,16 @@
-<ion-item>
-  <ion-thumbnail slot="start" *ngIf="speech.character != narrator">
+<ion-item *ngIf="speech.character !== narrator" lines="none">
+  <ion-thumbnail slot="start">
     <img [src]="speech.character.icon" />
   </ion-thumbnail>
+  <div class="balloon">
+    <ion-text>
+      {{ speech.text }}
+    </ion-text>
+    <ion-icon slot="end" name="volume-medium"></ion-icon>
+  </div>
+</ion-item>
+
+<ion-item *ngIf="speech.character === narrator">
   <ion-text>
     {{ speech.text }}
   </ion-text>

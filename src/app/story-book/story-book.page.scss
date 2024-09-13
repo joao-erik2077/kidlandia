@@ -1,5 +1,24 @@
 .main {
   transition: 0.3s;
+
+  .filler {
+    height: 45vh;
+  }
+
+  ion-button {
+    z-index: 3;
+    transition: 2.5s;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    opacity: 1 !important;
+  }
+}
+
+.mainNotShowing {
+  ion-button {
+    opacity: 0;
+  }
 }
 
 .cover {
