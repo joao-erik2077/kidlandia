@@ -3,4 +3,5 @@ export interface Character {
   image?: string,
   icon?: string,
   description: string,
+  voiceIndex: number,
 }

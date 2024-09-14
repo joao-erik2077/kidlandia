@@ -1,8 +1,11 @@
+import { TextToSpeechService } from './../services/text-to-speech.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Question, QuestionOption, Speech, Story } from '../models/Story';
 import { StoryService } from '../services/story.service';
 import { IonContent } from '@ionic/angular';
+import { narrator } from '../models/characters';
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
 
 @Component({
   selector: 'app-story-book',
@@ -23,23 +26,29 @@ export class StoryBookPage implements OnInit {
   @ViewChild(IonContent)
   content!: IonContent;
 
-  constructor(private storyService: StoryService, private router: Router) {
+  constructor(private storyService: StoryService, private router: Router, private textToSpeechService: TextToSpeechService) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.currentStory = this.storyService.getCurrentStory();
     this.storyHasStarted = false;
     this.shownSpeechs = [];
+    this.storyFinished = false;
     this.storyLine = [];
     this.maxSpeechs = this.currentStory.speechs.length;
     console.log(this.currentStory);
+    this.textToSpeechService.stop();
+    console.log(await TextToSpeech.getSupportedVoices())
+    this.textToSpeechService.speak(this.currentStory.title, narrator.voiceIndex);
   }
 
   startStory() {
     this.storyHasStarted = true;
     this.shownSpeechs.push(this.currentStory.speechs[0]);
     this.storyLine.push({ type: 'speech', speech: this.currentStory.speechs[0] });
+    this.textToSpeechService.stop();
+    this.textToSpeechService.speak(this.shownSpeechs[this.shownSpeechs.length - 1].text, this.shownSpeechs[this.shownSpeechs.length - 1].character.voiceIndex);
   }
 
   continueStory(skipQuestion = false) {
@@ -50,9 +59,10 @@ export class StoryBookPage implements OnInit {
       return this.startQuestion(this.shownSpeechs[this.shownSpeechs.length - 1]);
     }
     this.shownSpeechs.push(this.currentStory.speechs[this.shownSpeechs.length]);
-    this.storyLine.push({ type: 'speech', speech: this.currentStory.speechs[this.shownSpeechs.length] });
+    this.storyLine.push({ type: 'speech', speech: this.shownSpeechs[this.shownSpeechs.length - 1] });
     console.log('f' + this.maxSpeechs, this.shownSpeechs.length)
-    if (this.maxSpeechs === (this.shownSpeechs.length + 1)) this.storyFinished = true;
+    if (this.maxSpeechs === (this.shownSpeechs.length)) this.storyFinished = true;
+    this.textToSpeechService.speak(this.shownSpeechs[this.shownSpeechs.length - 1].text, this.shownSpeechs[this.shownSpeechs.length - 1].character.voiceIndex);
 
     this.content.scrollToBottom(500);
   }
@@ -75,6 +85,7 @@ export class StoryBookPage implements OnInit {
     this.storyHasStarted = false;
     this.shownSpeechs = [];
     this.storyLine = [];
+    this.storyFinished = false;
     this.maxSpeechs = this.currentStory.speechs.length;
     this.router.navigateByUrl('/tabs/tab2');
   }
