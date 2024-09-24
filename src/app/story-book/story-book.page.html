@@ -7,7 +7,11 @@
     </div>
     <div>
       <ion-text class="title">{{ currentStory.title }}</ion-text>
-      <ion-icon slot="end" name="volume-medium"></ion-icon>
+      <ion-icon
+        slot="end"
+        name="volume-medium"
+        (click)="textToSpeechService.speak(currentStory.title, 4)"
+      ></ion-icon>
     </div>
     <ion-button
       class="startStoryButton"

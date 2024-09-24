@@ -1,3 +1,4 @@
+import { TextToSpeechService } from './../../services/text-to-speech.service';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
@@ -14,15 +15,13 @@ import { narrator } from 'src/app/models/characters';
     CommonModule
   ]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent {
 
   @Input()
   speech?: Speech;
 
   narrator = narrator;
 
-  constructor() { }
-
-  ngOnInit() { }
+  constructor(public textToSpeechService: TextToSpeechService) { }
 
 }

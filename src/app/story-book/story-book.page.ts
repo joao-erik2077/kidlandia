@@ -26,7 +26,7 @@ export class StoryBookPage implements OnInit {
   @ViewChild(IonContent)
   content!: IonContent;
 
-  constructor(private storyService: StoryService, private router: Router, private textToSpeechService: TextToSpeechService) {
+  constructor(private storyService: StoryService, private router: Router, public textToSpeechService: TextToSpeechService) {
 
   }
 

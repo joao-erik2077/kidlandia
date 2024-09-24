@@ -6,7 +6,16 @@
     <ion-text>
       {{ speech?.text }}
     </ion-text>
-    <ion-icon slot="end" name="volume-medium"></ion-icon>
+    <ion-icon
+      slot="end"
+      name="volume-medium"
+      (click)="
+        textToSpeechService.speak(
+          speech?.text || '',
+          speech?.character?.voiceIndex || 0
+        )
+      "
+    ></ion-icon>
   </div>
 </ion-item>
 
@@ -14,5 +23,14 @@
   <ion-text>
     {{ speech?.text }}
   </ion-text>
-  <ion-icon slot="end" name="volume-medium"></ion-icon>
+  <ion-icon
+    slot="end"
+    name="volume-medium"
+    (click)="
+      textToSpeechService.speak(
+        speech?.text || '',
+        speech?.character?.voiceIndex || 0
+      )
+    "
+  ></ion-icon>
 </ion-item>
