@@ -22,4 +22,5 @@ export interface Question {
 export interface QuestionOption {
   text: string,
   valid: boolean,
+  onlyText?: boolean,
 }

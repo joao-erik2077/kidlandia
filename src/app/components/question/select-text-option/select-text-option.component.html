@@ -1,5 +1,7 @@
 <ion-text
   (click)="!clicked && !disabled && resolveOption()"
+  *ngIf="!option.onlyText"
+  class="option"
   [ngClass]="{
     disabled: disabled && !option.valid,
     correct: clicked && option.valid,
@@ -8,3 +10,11 @@
 >
   {{ option.text }}
 </ion-text>
+
+<ion-text
+  *ngIf="option.onlyText"
+  [ngClass]="{
+    disabled: disabled
+  }"
+  >{{ option.text }}</ion-text
+>

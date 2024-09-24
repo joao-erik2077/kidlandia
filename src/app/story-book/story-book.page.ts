@@ -61,7 +61,7 @@ export class StoryBookPage implements OnInit {
     this.shownSpeechs.push(this.currentStory.speechs[this.shownSpeechs.length]);
     this.storyLine.push({ type: 'speech', speech: this.shownSpeechs[this.shownSpeechs.length - 1] });
     console.log('f' + this.maxSpeechs, this.shownSpeechs.length)
-    if (this.maxSpeechs === (this.shownSpeechs.length)) this.storyFinished = true;
+    if (this.maxSpeechs === (this.shownSpeechs.length) && this.shownSpeechs[this.shownSpeechs.length - 1].question === undefined) this.storyFinished = true;
     this.textToSpeechService.speak(this.shownSpeechs[this.shownSpeechs.length - 1].text, this.shownSpeechs[this.shownSpeechs.length - 1].character.voiceIndex);
 
     this.content.scrollToBottom(500);
@@ -76,8 +76,10 @@ export class StoryBookPage implements OnInit {
   resolveQuestion(questionOption: QuestionOption) {
     console.log(`Story Book component: ${questionOption}`);
     if (questionOption.valid) {
+      if (this.maxSpeechs === (this.shownSpeechs.length)) return this.exit();
+
       this.isDoingQuestion = false;
-      this.continueStory(true);
+      return this.continueStory(true);
     }
   }
 
