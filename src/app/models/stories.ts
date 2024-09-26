@@ -5,6 +5,7 @@ const iWantADog: Story = {
   title: 'I Want a Dog',
   description: 'Eddy wants a dog.',
   image: 'https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-cartoon-messy-dog-food-png-image_12180823.png',
+  imageIcon: 'https://png.pngtree.com/png-vector/20240322/ourmid/pngtree-cartoon-messy-dog-food-png-image_12180823.png',
   speechs: [
     {
       text: 'Eddy and Junior are eating in a park.',
@@ -188,7 +189,8 @@ const iWantADog: Story = {
 const theNewStudent: Story = {
   title: 'The New Student',
   description: 'A new student arrives...',
-  image: '',
+  image: 'https://img.freepik.com/premium-photo/vector-cartoon-illustration-boy-with-books_1240525-29659.jpg',
+  imageIcon: 'https://img.pikbest.com/png-images/school-building-cartoon-school_5882539.png!sw800',
   speechs: [
     {
       text: 'Zari and Lily are sitting together on the school bus.',
@@ -347,10 +349,188 @@ const theNewStudent: Story = {
 };
 
 const doctorEddy: Story = {
-  title: '',
-  description: '',
-  image: '',
-  speechs: [],
+  title: 'Doctor Eddy',
+  description: 'Eddy thinks he\'s a doctor',
+  image: 'assets/doctorEddy.png',
+  imageIcon: 'https://www.publicdomainpictures.net/pictures/450000/nahled/medical-doctor-cartoon-clipart.png',
+  speechs: [
+    {
+      text: 'Eddy is at the supermarket.',
+      character: narrator,
+    },
+    {
+      text: 'An elegant woman starts talking to Eddy.',
+      character: narrator,
+      question: {
+        type: 'multipleChoice',
+        text: 'Uma mulher começou a falar com Eddy no supermercado.',
+        options: [
+          {
+            text: 'Não, não é isso.',
+            valid: false,
+          },
+          {
+            text: 'Sim, isso mesmo.',
+            valid: true,
+          },
+        ],
+      },
+    },
+    {
+      text: 'Hello!',
+      character: beeSmith,
+    },
+    {
+      text: 'Oh, hello!',
+      character: enzoSilva,
+    },
+    {
+      text: 'Are you a doctor?',
+      character: beeSmith,
+    },
+    {
+      text: 'What? Me? Uh...',
+      character: enzoSilva,
+    },
+    {
+      text: 'Yes. I... am a doctor.',
+      character: enzoSilva,
+    },
+    {
+      text: 'Good!',
+      character: beeSmith,
+    },
+    {
+      text: 'I have a lot of money.',
+      character: enzoSilva,
+    },
+    {
+      text: 'I live in a big house.',
+      character: enzoSilva,
+    },
+    {
+      text: 'I have expensive... uh... pants.',
+      character: enzoSilva,
+    },
+    {
+      text: 'Ok, but...',
+      character: beeSmith,
+      question: {
+        type: 'selectText',
+        text: 'Escolha a opção que significa "agora".',
+        options: [
+          {
+            text: 'A',
+            valid: false,
+          },
+          {
+            text: 'man',
+            valid: false,
+          },
+          {
+            text: 'needs',
+            valid: false,
+          },
+          {
+            text: 'a doctor',
+            valid: false,
+            onlyText: true,
+          },
+          {
+            text: 'now',
+            valid: true,
+          },
+          {
+            text: '!',
+            valid: false,
+            onlyText: true,
+          },
+        ],
+      },
+    },
+    {
+      text: 'A man needs a doctor now!',
+      character: beeSmith,
+    },
+    {
+      text: 'What?! Where is the man?',
+      character: enzoSilva,
+    },
+    {
+      text: 'He is near the milk!',
+      character: beeSmith,
+      question: {
+        type: 'multipleChoice',
+        text: 'O homem está...',
+        options: [
+          {
+            text: '...no hospital.',
+            valid: false,
+          },
+          {
+            text: '...perto da seção do leito no supermercado.',
+            valid: true,
+          },
+          {
+            text: '...no carrinho de compras de Eddy.',
+            valid: false,
+          },
+        ],
+      },
+    },
+    {
+      text: 'Please help the man! He is very sick!',
+      character: beeSmith,
+      question: {
+        type: 'multipleChoice',
+        text: 'A mulher quer que Eddy...',
+        options: [
+          {
+            text: '...compre um pouco de leite.',
+            valid: false,
+          },
+          {
+            text: '...ajude um homem que está doente.',
+            valid: true,
+          },
+          {
+            text: '...vá a um consultório médico.',
+            valid: false,
+          },
+        ],
+      },
+    },
+    {
+      text: 'Uh-oh!',
+      character: enzoSilva,
+    },
+    {
+      text: 'Eddy sees a woman. He runs and talks to her.',
+      character: narrator,
+    },
+    {
+      text: 'Hello, are you a doctor? I need help!',
+      character: enzoSilva,
+      question: {
+        type: 'multipleChoice',
+        text: 'O que Eddy está fazendo?',
+        options: [
+          {
+            text: 'Tentando achar um médico de verdade para ajudar o homem.',
+            valid: true,
+          },
+          {
+            text: 'Chorando porque derramou leite.',
+            valid: false,
+          },
+          {
+            text: 'Levando um homem doente até o hospital.',
+            valid: false,
+          },
+        ],
+      },
+    },
+  ],
 };
 
 export { iWantADog, theNewStudent, doctorEddy };

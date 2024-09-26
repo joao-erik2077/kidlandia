@@ -4,6 +4,7 @@ export interface Story {
   title: string,
   description: string,
   image: string,
+  imageIcon: string,
   speechs: Speech[],
 }
 
