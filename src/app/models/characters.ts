@@ -29,7 +29,7 @@ const maribelPerez: Character = {
   description: 'Nasceu na espanha ama os animais, sua mãe tem uma ONG que os protege.',
   image: 'assets/characters/images/MaribelPerez.png',
   icon: 'assets/characters/icons/MaribelPerez.png',
-  voiceIndex: 20
+  voiceIndex: 4
 };
 
 const enzoSilva: Character = {
