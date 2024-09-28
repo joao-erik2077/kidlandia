@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StoryService } from '../services/story.service';
 import { doctorEddy, iWantADog, theNewStudent } from '../models/stories';
-import { Story } from '../models/Story';
+import { Story } from '../models/IStory';
 
 @Component({
   selector: 'app-tab2',
@@ -12,7 +12,7 @@ import { Story } from '../models/Story';
 export class Tab2Page {
   public stories: Story[] = [iWantADog, theNewStudent, doctorEddy];
 
-  constructor(private router: Router, private storyService: StoryService) {}
+  constructor(private router: Router, private storyService: StoryService) { }
 
   startStory(story: Story) {
     this.storyService.saveCurrentStory(story);

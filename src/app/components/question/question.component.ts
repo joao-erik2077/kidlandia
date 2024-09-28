@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { Question, QuestionOption } from 'src/app/models/Story';
+import { Question, QuestionOption } from 'src/app/models/IStory';
 import { SelectTextOptionComponent } from "./select-text-option/select-text-option.component";
 import { MultipleChoiceOptionComponent } from './multiple-choice-option/multiple-choice-option.component';
 

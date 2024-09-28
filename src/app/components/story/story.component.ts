@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Story } from '../../models/Story';
+import { Story } from '../../models/IStory';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ]
 })
-export class StoryComponent  implements OnInit {
+export class StoryComponent implements OnInit {
 
   @Input()
   public story!: Story;
@@ -22,6 +22,6 @@ export class StoryComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

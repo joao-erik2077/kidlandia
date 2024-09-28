@@ -2,7 +2,7 @@ import { TextToSpeechService } from './../../services/text-to-speech.service';
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { Speech } from 'src/app/models/Story';
+import { Speech } from 'src/app/models/IStory';
 import { narrator } from 'src/app/models/characters';
 
 @Component({

@@ -1,4 +1,4 @@
-import { Story } from './Story';
+import { Story } from './IStory';
 import { enzoSilva, moonbimChin, narrator, beeSmith, maribelPerez } from './characters';
 
 const iWantADog: Story = {

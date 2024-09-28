@@ -1,7 +1,7 @@
 import { TextToSpeechService } from './../services/text-to-speech.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Question, QuestionOption, Speech, Story } from '../models/Story';
+import { Question, QuestionOption, Speech, Story } from '../models/IStory';
 import { StoryService } from '../services/story.service';
 import { IonContent } from '@ionic/angular';
 import { narrator } from '../models/characters';
