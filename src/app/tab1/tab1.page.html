@@ -1,4 +1,28 @@
-<app-header></app-header>
+<app-header title="Conheça os personagens"></app-header>
 
 <ion-content [fullscreen]="true">
+  <swiper-container>
+    <swiper-slide *ngFor="let character of characters">
+      <ion-card>
+        <img [src]="character.image" [alt]="character.name" />
+        <ion-card-header>
+          <ion-card-title>{{ character.name }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content> {{ character.description }} </ion-card-content>
+
+        <div class="makeMeTalk">
+          <ion-input
+            fill="outline"
+            [(ngModel)]="text"
+            placeholder="Me faça dizer algo..."
+          ></ion-input>
+
+          <ion-button (click)="speak(text, character.voiceIndex)"
+            ><ion-icon slot="icon-only" name="mic"></ion-icon
+          ></ion-button>
+        </div>
+      </ion-card>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>

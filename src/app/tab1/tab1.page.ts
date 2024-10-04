@@ -1,4 +1,7 @@
+import { TextToSpeechService } from './../services/text-to-speech.service';
 import { Component } from '@angular/core';
+import { Character } from '../models/Character';
+import { beeSmith, enzoSilva, maribelPerez, moonbimChin } from '../models/characters';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +10,12 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  public characters: Character[] = [beeSmith, moonbimChin, maribelPerez, enzoSilva];
+  public text: string = '';
 
+  constructor(public textToSpeechService: TextToSpeechService) { }
+
+  speak(text: string, voiceIndex: number) {
+    this.textToSpeechService.speak(text, voiceIndex);
+  }
 }
