@@ -1,0 +1,19 @@
+<app-header [backButton]="false" title="congratulations!"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title>
+        <div>Congratulations!</div>
+        <div>You did it!</div>
+      </ion-card-title>
+      <img src="assets/confeti.png" alt="Congratulations image" />
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button color="success" fill="outline" mode="md" (click)="exit()">
+        Voltar para a página inicial
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

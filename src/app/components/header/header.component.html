@@ -1,8 +1,7 @@
-<ion-header [translucent]="true" color="kid-primary" *ngIf="show" mode="md">
+<ion-header [translucent]="true" color="kid-primary" *ngIf="show">
   <ion-toolbar color="kid-primary">
-    <ion-buttons slot="start" *ngIf="backButton">
+    <ion-buttons slot="start" *ngIf="backButton" class="backButton">
       <ion-back-button
-        mode="md"
         default-href="/"
         icon="chevron-back"
         size="large"

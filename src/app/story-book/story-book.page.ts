@@ -89,6 +89,6 @@ export class StoryBookPage implements OnInit {
     this.storyLine = [];
     this.storyFinished = false;
     this.maxSpeechs = this.currentStory.speechs.length;
-    this.router.navigateByUrl('/tabs/tab2');
+    this.router.navigateByUrl('/congratulations');
   }
 }
