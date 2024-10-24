@@ -9,6 +9,12 @@ interface IndexEntry {
   size: number;
 }
 
+interface Suggestion {
+  word: string;
+  pronunciation: string;
+  partOfSpeech: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -67,19 +73,53 @@ export class StarDictParserService {
   }
 
   // Get the definition for a specific word
-  getDefinition(word: string): string | null {
+  getDefinition(word: string): string {
     if (!this.dictData) {
       throw new Error('Dictionary data not loaded.');
     }
 
     const entry = this.idx.find((entry) => entry.word === word);
     if (!entry) {
-      return null;
+      return '';
     }
 
     const definitionBuffer = this.dictData.slice(entry.offset, entry.offset + entry.size);
     return new TextDecoder('utf-8').decode(definitionBuffer);
   }
+
+  // Function to get the top N matches based on the input query
+  getTopMatches(query: string, limit: number = 10): Suggestion[] {
+    const matches = this.idx
+      .filter(entry => entry.word.startsWith(query))
+      .slice(0, limit)
+      .map(entry => {
+        const definitionData = this.getDefinitionData(entry.word);
+        return {
+          word: entry.word,
+          pronunciation: definitionData.pronunciation || 'N/A',
+          partOfSpeech: definitionData.partOfSpeech || 'N/A',
+        };
+      });
+
+    return matches;
+  }
+
+  getDefinitionData(word: string): { pronunciation: string; partOfSpeech: string } {
+    if (!this.dictData) return { pronunciation: '', partOfSpeech: '' };
+
+    // Logic to extract pronunciation and part of speech from dictData
+    const definition: any = this.getDefinition(word);
+
+    // Assume we have a way to extract pronunciation and part of speech from the definition
+    const pronunciationMatch = definition.match(/<font color="gray">(.*?)<\/font>/);
+    const partOfSpeechMatch = definition.match(/<font color="green">(.*?)<\/font>/);
+
+    return {
+      pronunciation: pronunciationMatch ? pronunciationMatch[1] : '',
+      partOfSpeech: partOfSpeechMatch ? partOfSpeechMatch[1] : '',
+    };
+  }
+
 
   // Run the parser (initialize)
   async init(fileName: string): Promise<void> {

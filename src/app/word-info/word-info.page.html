@@ -1,0 +1,60 @@
+<app-header [backButton]="true" [title]="word.word"></app-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Pronunciations Section -->
+  <!-- <ion-card *ngIf="data.pronunciation.length > 0">
+    <ion-card-header>
+      <ion-card-title>Pronunciations</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let pronunciation of data.pronunciation">
+          <ion-label>{{ pronunciation }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card> -->
+
+  <!-- Part of Speech Section -->
+  <ion-card *ngIf="data.partOfSpeech">
+    <ion-card-header>
+      <ion-card-title>Part of Speech / Classe Gramatical</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ data.partOfSpeech }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="data.partOfSpeech">
+    <ion-card-header>
+      <ion-card-title>Translation / Tradução</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let translation of translations" lines="none">
+          <ion-label>
+            <p class="translation">{{ translation }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Definitions Section -->
+  <ion-card *ngIf="data.definitions.length > 0">
+    <ion-card-header>
+      <ion-card-title>Definitions / Significados</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <div *ngFor="let definition of definitions">
+          <ion-item *ngIf="definition.length > 0">
+            <ion-label>
+              <h2>{{ definition }}</h2>
+            </ion-label>
+          </ion-item>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
