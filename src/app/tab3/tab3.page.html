@@ -1,5 +1,24 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <app-searchbar></app-searchbar>
+  <ion-searchbar
+    placeholder="Pesquisar..."
+    [(ngModel)]="query"
+    (ionInput)="onSearchInput($event)"
+    debounce="300"
+  >
+  </ion-searchbar>
+
+  <ion-list *ngIf="suggestions.length > 0">
+    <ion-item
+      *ngFor="let suggestion of suggestions"
+      (click)="wordInfo(suggestion)"
+    >
+      <ion-label>
+        <h2>{{ suggestion.word }}</h2>
+        <p><strong>Part of Speech:</strong> {{ suggestion.partOfSpeech }}</p>
+      </ion-label>
+      <ion-icon name="chevron-forward" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
