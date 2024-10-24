@@ -1,14 +1,18 @@
 export interface ParsedData {
   pronunciation: string[];
-  partOfSpeech: string;
-  definitions: Array<{ definition: string, translations?: string[], subDefinitions?: string[] }>;
+  partOfSpeech: string | undefined;
+  definitions: Array<{ definition: string }>;
+  translations: string[];
 }
 
 export function parseStarDictData(html: string): ParsedData {
+  // Remove the root <div> tag
+  html = html.replace(/^<div>|<\/div>$/g, '');
+
   // Remove <br> tags for easier processing
   html = html.replace(/<br\s*\/?>/gi, '\n');
 
-  // Extract pronunciations (inside <font color="gray">)
+  // Extract pronunciations (inside <font color="gray">), if present
   const pronunciationRegex = /<font color="gray">(.*?)<\/font>/g;
   const pronunciations: string[] = [];
   let match;
@@ -16,100 +20,66 @@ export function parseStarDictData(html: string): ParsedData {
     pronunciations.push(match[1]);
   }
 
-  // Extract part of speech (inside <font color="green">)
+  // Extract part of speech (inside <font color="green">), if present
   const partOfSpeechMatch = html.match(/<font color="green">(.*?)<\/font>/);
-  const partOfSpeech = partOfSpeechMatch ? partOfSpeechMatch[1] : '';
+  const partOfSpeech = partOfSpeechMatch ? partOfSpeechMatch[1] : undefined;
 
-  // Prepare to store the definitions
-  const definitions: Array<{ definition: string, translations?: string[], subDefinitions?: string[] }> = [];
+  // Prepare to store the definitions and translations
+  const definitions: string[] = [];
+  const translations: string[] = [];
 
-  // Handle multiple definitions wrapped in <ol><li>
-  const listDefinitionRegex = /<li>(.*?)<\/li>/g;
-  const translationRegex = /<div>(.*?)<\/div>/g;
+  // Helper function to remove HTML tags
+  const removeHTMLTags = (text: string): string => text.replace(/<[^>]+>/g, '').trim();
 
-  // Find all definitions inside <ol><li> tags
-  const olMatch = html.match(/<ol>(.*?)<\/ol>/);
-  if (olMatch) {
-    const olContent = olMatch[1]; // Get content inside the <ol>
-    let liMatch;
-    while ((liMatch = listDefinitionRegex.exec(olContent)) !== null) {
-      let definitionText = liMatch[1];
+  // Handle multiple definitions inside <li> tags
+  const multipleDefinitionsRegex = /<li>(.*?)<\/li>/g;
+  let multipleDefinitionMatch;
 
-      // Extract and remove translations directly from <div> inside <li>
-      const translationsSet: Set<string> = new Set();
-      let translationMatch;
-      while ((translationMatch = translationRegex.exec(definitionText)) !== null) {
-        translationsSet.add(translationMatch[1].trim());
-      }
+  while ((multipleDefinitionMatch = multipleDefinitionsRegex.exec(html)) !== null) {
+    const listItemContent = multipleDefinitionMatch[1];
 
-      // Remove the <div> translations from the definition text
-      definitionText = definitionText.replace(translationRegex, '').trim();
+    // Remove any <div> (translations) from the list item to get the pure definition
+    const cleanedDefinition = removeHTMLTags(listItemContent.replace(/<div>.*?<\/div>/g, '').trim());
 
-      // Remove any nested <ol><li> from the definition (to handle sub-definitions)
-      definitionText = definitionText.replace(/<ol>.*?<\/ol>/g, '').trim();
+    if (cleanedDefinition && !definitions.includes(cleanedDefinition)) {
+      definitions.push(cleanedDefinition); // Ensure uniqueness
+    }
 
-      // Clean any remaining HTML tags
-      definitionText = definitionText.replace(/<[^>]+>/g, '').trim();
-
-      // Only add a definition if the definitionText is not empty
-      if (definitionText || translationsSet.size > 0) {
-        definitions.push({
-          definition: definitionText ? definitionText : "", // Handle potential empty definitions
-          translations: translationsSet.size ? Array.from(translationsSet) : undefined,
-        });
+    // Capture nested translations from <div> inside <li> and <ol> tags
+    const nestedTranslationRegex = /<div>(.*?)<\/div>/g;
+    let nestedTranslationMatch;
+    while ((nestedTranslationMatch = nestedTranslationRegex.exec(listItemContent)) !== null) {
+      const translation = removeHTMLTags(nestedTranslationMatch[1]);
+      if (translation && !translations.includes(translation)) {
+        translations.push(translation); // Add translation
       }
     }
   }
 
-  // Handle single <div> wrapped definitions (like chocolate bar)
-  const divDefinitionRegex = /<font color="green">.*?<\/font>\n(.*?)<div>(.*?)<\/div>/;
-  const divMatch = divDefinitionRegex.exec(html);
-
-  if (divMatch) {
-    let definitionText = divMatch[1].replace(/<[^>]+>/g, '').trim(); // Extract and clean the definition text
-    const translation = divMatch[2].trim(); // Extract the translation from the nested <div>
-
-    // Remove the translation if it appears at the end of the definition
-    definitionText = removeTranslationFromDefinition(definitionText, translation);
-
-    definitions.push({
-      definition: definitionText,
-      translations: [translation],
-    });
+  // Handle definitions that are directly after part of speech, without being in an <li> tag
+  const nonNestedDefinitionRegex = /<font color="green">.*?<\/font>\n([^<]+)(?:<div>|<\/div>)/;
+  const nonNestedDefinitionMatch = html.match(nonNestedDefinitionRegex);
+  if (nonNestedDefinitionMatch) {
+    const definitionText = removeHTMLTags(nonNestedDefinitionMatch[1].trim());
+    if (definitionText && !definitions.includes(definitionText)) {
+      definitions.push(definitionText); // Add the definition
+    }
   }
 
-  // Reorder definitions to move the ones with tags to the end
-  const reorderedDefinitions = reorderDefinitions(definitions);
+  // Handle root-level translations directly after the definition
+  const translationAfterNonNestedDefinitionRegex = /<div>(.*?)<\/div>/g;
+  let translationAfterNonNestedDefinitionMatch;
+  while ((translationAfterNonNestedDefinitionMatch = translationAfterNonNestedDefinitionRegex.exec(html)) !== null) {
+    const translation = removeHTMLTags(translationAfterNonNestedDefinitionMatch[1]);
+    if (translation && !translations.includes(translation)) {
+      translations.push(translation); // Add the translation
+    }
+  }
 
   return {
     pronunciation: pronunciations,
     partOfSpeech: partOfSpeech,
-    definitions: reorderedDefinitions,
+    definitions: definitions.map(def => ({ definition: def })), // Convert to array of objects
+    translations
   };
-}
-
-// Helper function to remove the translation from the definition if it appears at the end
-function removeTranslationFromDefinition(definition: string, translation?: string): string {
-  if (translation && definition.endsWith(translation)) {
-    return definition.slice(0, -translation.length).trim();  // Remove the translation from the end
-  }
-  return definition;
-}
-
-// Helper function to reorder definitions (those with tags to the end)
-function reorderDefinitions(definitions: Array<{ definition: string, translations?: string[], subDefinitions?: string[] }>): Array<{ definition: string, translations?: string[], subDefinitions?: string[] }> {
-  const noTagDefinitions: { definition: string; translations?: string[] | undefined; subDefinitions?: string[] | undefined; }[] = [];
-  const taggedDefinitions: { definition: string; translations?: string[] | undefined; subDefinitions?: string[] | undefined; }[] = [];
-
-  definitions.forEach(def => {
-    if (def.definition.startsWith('(')) {
-      // This definition starts with a tag (parentheses)
-      taggedDefinitions.push(def);
-    } else {
-      noTagDefinitions.push(def);
-    }
-  });
-
-  // Return no-tag definitions first, followed by tagged definitions
-  return [...noTagDefinitions, ...taggedDefinitions];
 }

@@ -25,7 +25,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="data.partOfSpeech">
+  <ion-card *ngIf="translations.size > 0">
     <ion-card-header>
       <ion-card-title>Translation / Tradução</ion-card-title>
     </ion-card-header>
@@ -41,7 +41,7 @@
   </ion-card>
 
   <!-- Definitions Section -->
-  <ion-card *ngIf="data.definitions.length > 0">
+  <ion-card *ngIf="definitions.size > 0">
     <ion-card-header>
       <ion-card-title>Definitions / Significados</ion-card-title>
     </ion-card-header>

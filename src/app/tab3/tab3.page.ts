@@ -10,39 +10,47 @@ import { WordInfoService } from '../services/word-info.service';
 })
 export class Tab3Page implements OnInit {
   query: string = '';
-  suggestions: Array<{ word: string; pronunciation: string; partOfSpeech: string }> = [];
+  suggestions: Map<string, { word: string; pronunciation: string; partOfSpeech: string }> = new Map();
 
-  constructor(private dictionaryService: StarDictParserService, private router: Router, private wordInfoService: WordInfoService) { }
+  constructor(
+    private dictionaryService: StarDictParserService,
+    private router: Router,
+    private wordInfoService: WordInfoService
+  ) { }
 
   async ngOnInit() {
     const dictFileName = 'stardict'; // The base name of your dictionary files (e.g., stardict.ifo, stardict.idx, etc.)
 
     // Initialize the parser and load the dictionary
     await this.dictionaryService.init(dictFileName);
-
-    // Get the definition for a word
-    // const word = 'build';
-    // const definition: any = this.dictionaryService.getDefinition(word);
-    // console.log(`Definition of ${word}: ${definition}`);
-    // console.log(parseStarDictData(definition))
   }
 
   onSearchInput(event: any) {
     const input = event.target.value.trim();
     if (input.length > 0) {
-      this.suggestions = this.getTopSuggestions(input);
+      this.updateSuggestions(input);
     } else {
-      this.suggestions = [];
+      this.suggestions.clear();
     }
   }
 
-  getTopSuggestions(query: string): Array<{ word: string; pronunciation: string; partOfSpeech: string }> {
-    // Use the service to fetch the top 5 suggestions
-    return this.dictionaryService.getTopMatches(query, 10);
+  updateSuggestions(query: string) {
+    // Use the service to fetch the top suggestions
+    const topSuggestions = this.dictionaryService.getTopMatches(query, 10);
+    this.suggestions.clear(); // Clear existing suggestions
+
+    topSuggestions.forEach(suggestion => {
+      this.suggestions.set(suggestion.word, suggestion); // Add suggestion with 'word' as the key
+    });
+  }
+
+  get suggestionsArray() {
+    // Convert Map to Array for rendering in template
+    return Array.from(this.suggestions.values());
   }
 
   wordInfo(word: any) {
     this.wordInfoService.setWord(word);
-    this.router.navigateByUrl('/word-info')
+    this.router.navigateByUrl('/word-info');
   }
 }

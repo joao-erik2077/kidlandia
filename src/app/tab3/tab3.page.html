@@ -9,9 +9,9 @@
   >
   </ion-searchbar>
 
-  <ion-list *ngIf="suggestions.length > 0">
+  <ion-list *ngIf="suggestions.size > 0">
     <ion-item
-      *ngFor="let suggestion of suggestions"
+      *ngFor="let suggestion of suggestionsArray"
       (click)="wordInfo(suggestion)"
     >
       <ion-label>
