@@ -25,3 +25,8 @@ ion-card {
   opacity: 0;
   transition: 0.3s;
 }
+
+.selectSentence {
+  display: flex;
+  flex-direction: column;
+}

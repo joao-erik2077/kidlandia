@@ -15,7 +15,7 @@ export interface Speech {
 }
 
 export interface Question {
-  type: 'multipleChoice' | 'selectText',
+  type: 'multipleChoice' | 'selectText' | 'selectSentence',
   text: string,
   options?: QuestionOption[],
 }

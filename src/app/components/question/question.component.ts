@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { Question, QuestionOption } from 'src/app/models/IStory';
 import { SelectTextOptionComponent } from "./select-text-option/select-text-option.component";
 import { MultipleChoiceOptionComponent } from './multiple-choice-option/multiple-choice-option.component';
+import { SelectSentenceOptionComponent } from './select-sentence-option/select-sentence-option.component';
 
 @Component({
   selector: 'app-question',
@@ -14,7 +15,8 @@ import { MultipleChoiceOptionComponent } from './multiple-choice-option/multiple
     IonicModule,
     CommonModule,
     SelectTextOptionComponent,
-    MultipleChoiceOptionComponent
+    MultipleChoiceOptionComponent,
+    SelectSentenceOptionComponent
   ]
 })
 export class QuestionComponent implements OnInit {

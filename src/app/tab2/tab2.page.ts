@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StoryService } from '../services/story.service';
-import { doctorEddy, iWantADog, theNewStudent } from '../models/stories';
+import { birthdayPlan, canIHaveIt, doctorMoonbim, iWantADog, enzoChoiche, thanks, theNewStudent } from '../models/stories';
 import { Story } from '../models/IStory';
 
 @Component({
@@ -10,7 +10,7 @@ import { Story } from '../models/IStory';
   styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page {
-  public stories: Story[] = [iWantADog, theNewStudent, doctorEddy];
+  public stories: Story[] = [iWantADog, theNewStudent, doctorMoonbim, canIHaveIt, enzoChoiche, thanks, birthdayPlan];
 
   constructor(private router: Router, private storyService: StoryService) { }
 

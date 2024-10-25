@@ -1,0 +1,33 @@
+ion-text {
+  font-size: 1rem;
+  color: #202020;
+  transition: 0.1s;
+  margin-left: 4px;
+  line-height: 3rem;
+
+  &.option {
+    border-radius: 5px;
+    margin-left: 8px;
+    padding: 10px;
+    border: 1px solid #757575;
+    box-shadow: 1px 1px 2px 1px #757575;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.correct {
+  color: #202020;
+  background-color: #77ff95;
+  border: 1px solid #757575;
+  box-shadow: 1px 1px 2px 1px #757575;
+}
+
+.wrong {
+  color: #202020;
+  background-color: #ff7777;
+  border: 1px solid #757575;
+  box-shadow: 1px 1px 2px 1px #757575;
+}

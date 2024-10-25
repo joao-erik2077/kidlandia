@@ -22,6 +22,16 @@
       >
       </app-select-text-option>
     </div>
+
+    <div class="selectSentence" *ngIf="question?.type === 'selectSentence'">
+      <app-select-sentence-option
+        *ngFor="let option of question?.options"
+        [option]="option"
+        [disabled]="questionFinished"
+        (correctOptionClick)="correctOptionClick($event)"
+      >
+      </app-select-sentence-option>
+    </div>
   </ion-card-content>
 </ion-card>
 

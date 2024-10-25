@@ -2,9 +2,12 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div>
-    <app-searchbar></app-searchbar>
     <ion-list>
-      <app-story *ngFor="let story of stories" [story]="story" (click)="startStory(story)"></app-story>
+      <app-story
+        *ngFor="let story of stories"
+        [story]="story"
+        (click)="startStory(story)"
+      ></app-story>
     </ion-list>
   </div>
 </ion-content>
