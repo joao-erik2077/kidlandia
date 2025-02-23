@@ -12,12 +12,12 @@ import { IonicModule } from '@ionic/angular';
     CommonModule
   ]
 })
-export class HeaderComponent   {
+export class HeaderComponent {
   @Input()
   public backButton = false;
 
   @Input()
-  public title = "kidlândia";
+  public title = "kidlandia";
 
   @Input()
   public show = true;
